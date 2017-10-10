@@ -61,7 +61,7 @@ var thirdDinosaurJSON = function(){
 };
 
 //PROMISE WORKS - promise pyramid of DOOM
-var dinoGetter = function(){
+/*var dinoGetter = function(){
 	firstDinosaurJSON().then(function(results){
 		results.forEach(function(dino){
 			dinosaurs.push(dino);
@@ -80,8 +80,34 @@ var dinoGetter = function(){
 	}).catch(function(error){
 		console.log("error from dino1", error);
   });
+};*/
+
+//The right way
+var dinoGetter = function(){
+	firstDinosaurJSON().then(function(results){
+		results.forEach(function(dino){
+			dinosaurs.push(dino);
+		});
+		return secondDinosaurJSON();
+	}).then(function(results2){
+		results2.forEach(function(dino){
+			dinosaurs.push(dino);
+		});
+		return thirdDinosaurJSON();
+	}).then(function(results3){
+		results3.forEach(function(dino){
+				dinosaurs.push(dino);
+			});
+		console.log("dinosaurs", dinosaurs);
+		makeDinos();
+	});
 };
 
+var makeDinos = function(){
+	dinosaurs.forEach(function(dino){
+		dom(dino);
+	});
+};
 
 
 var initializer = function(){
@@ -101,8 +127,11 @@ var outputDiv = $('#dinosaur');
 var buildDomString = (dinosaur) =>{
 	var domString = "";
 	domString += `<div>`;
-	domString += 	`<h1> ${dinosaur.name} </h1>`;	
+	domString += 	`<h1> ${dinosaur.type} </h1>`;	
+	domString +=	`<h3> ${dinosaur.bio} </h3>`;
+	domString += 	`<h3> ${dinosaur.info} </h3>`;
 	domString += `</div>`;
+
 	
 	writeToDom(domString);
 };
