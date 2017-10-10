@@ -81,8 +81,8 @@ var thirdDinosaurJSON = function(){
   });
 };*/
 
-//The right way
-var dinoGetter = function(){
+//Promises - The right way
+/*var dinoGetter = function(){
 	firstDinosaurJSON().then(function(results){
 		results.forEach(function(dino){
 			dinosaurs.push(dino);
@@ -99,6 +99,20 @@ var dinoGetter = function(){
 			});
 		console.log("dinosaurs", dinosaurs);
 		makeDinos();
+	});
+};*/
+
+var dinoGetter = function(){
+	Promise.all([firstDinosaurJSON(), secondDinosaurJSON(), thirdDinosaurJSON()]).then(function(results){
+		console.log("results from promise.all", results);
+		results.forEach(function(result){
+			result.forEach(function(dino){
+				dinosaurs.push(dino);
+			});
+		});
+		makeDinos();
+	}).catch(function(error){
+		console.log("error from Promise.all", error);
 	});
 };
 
