@@ -1,9 +1,9 @@
 "use strict";
 
-var outputDiv = $('#dinosaur');
+let outputDiv = $('#dinosaur');
 
-var buildDomString = (dinosaur) =>{
-	var domString = "";
+const buildDomString = (dinosaur) => {
+	let domString = "";
 	domString += `<div>`;
 	domString += 	`<h1> ${dinosaur.type} </h1>`;	
 	domString +=	`<h3> ${dinosaur.bio} </h3>`;
