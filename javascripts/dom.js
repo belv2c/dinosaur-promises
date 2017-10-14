@@ -4,10 +4,25 @@ let outputDiv = $('#dinosaur');
 
 const buildDomString = (dinosaur) => {
 	let domString = "";
-	domString += `<div>`;
+	domString += `<div class=${dinosaur.info === 'Carnivore' ? 'card-bad' : 'card-good'}>`;
 	domString += 	`<h1> ${dinosaur.type} </h1>`;	
-	domString +=	`<h3> ${dinosaur.bio} </h3>`;
-	domString += 	`<h3> ${dinosaur.info} </h3>`;
+	domString += 	`<h4> ${dinosaur.bio} </h4>`;	
+	if (dinosaur.info === 'Carnivore') {
+		domString += `<h4>Has some tasty snacks.</h4>`;
+	} else {
+		domString += `<h4>Has some adorable (debatable) friends.</h4>`;
+	}
+	domString += `<div class='card-holder'>`;
+	dinosaur.snacks.forEach((cat) => {
+		domString += `<div class='card'>`;
+		domString += `<h5>${cat.name}</h5>`;
+		domString += `<div class='card-img'>`;
+		domString += `<img src='${cat.imageUrl}''>`;
+		domString += `</div>`;
+		domString += `<p class='card-description'>${cat.specialSkill}</p>`;
+		domString += `</div>`;
+	});
+	domString += `</div>`;
 	domString += `</div>`;
 
 	
